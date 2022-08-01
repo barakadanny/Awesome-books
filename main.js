@@ -16,7 +16,7 @@ function storeBooks() {
 function createBook(title, author) {
   const newBook = {
     title: title,
-    author: author,
+    author,
   };
   books.push(newBook);
 
