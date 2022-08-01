@@ -1,5 +1,4 @@
 /*eslint object-shorthand: "error"*/
-/*eslint-env es6*/
 
 const bookList = document.querySelector('.books-list');
 const form = document.querySelector('form');
