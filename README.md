@@ -2,55 +2,40 @@
 
 # Project Name
 
-> Description the project.
-
+"Awesome books" is a simple website that displays a list of books and allows you to add and remove books from that list.
 
 ## Built With
 
-- Major languages
-- Frameworks
-- Technologies used
+- Html
+- JavaScript
 
 ## Live Demo (if available)
 
-[Live Demo Link](https://livedemo.com)
+<!-- [Live Demo Link](https://livedemo.com) -->
 
+comming soon
 
 ## Getting Started
 
 **This is an example of how you may give instructions on setting up your project locally.**
 **Modify this file to match your project, remove sections that don't apply. For example: delete the testing section if the currect project doesn't require testing.**
 
-
 To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-### Setup
-
-### Install
-
-### Usage
-
-### Run tests
-
-### Deployment
-
-
+- knowledge of Basic Javascript and Html
 
 ## Authors
 
-👤 **Author1**
+👤 **Baraka Danny**
 
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
+- GitHub: [@barakadan](https://github.com/barakadanny)
+- LinkedIn: [danny baraka](https://www.linkedin.com/in/danny-baraka-589156169/)
 
-👤 **Author2**
+👤 **David Kasilia**
 
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
+- GitHub: [@David-kasilia](https://github.com/David-Kasilia)
 
 ## 🤝 Contributing
 

@@ -1,4 +1,3 @@
-/*eslint object-shorthand: ["error", "always", { "avoidQuotes": true }]*/
 const bookList = document.querySelector('.books-list');
 const form = document.querySelector('form');
 const bookTitle = document.querySelector('.book-title');
@@ -15,7 +14,7 @@ function storeBooks() {
 // function to create a new book
 function createBook(title, author) {
   const newBook = {
-    title: title,
+    title,
     author,
   };
   books.push(newBook);
