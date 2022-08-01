@@ -1,5 +1,4 @@
-/*eslint object-shorthand: "error"*/
-
+/*eslint object-shorthand: ["error", "always", { "avoidQuotes": true }]*/
 const bookList = document.querySelector('.books-list');
 const form = document.querySelector('form');
 const bookTitle = document.querySelector('.book-title');
