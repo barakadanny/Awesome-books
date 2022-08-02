@@ -22,8 +22,7 @@ function createBook(title, author) {
   const singleBook = document.createElement('tr');
   books.forEach((book, index) => {
     singleBook.innerHTML = `
-            <td>${book.title}</td>
-            <td>${book.author}</td>
+            <td>" ${book.title} " by ${book.author}</td>
             <td><input class="remove" type="submit" value="Remove"></td>
         `;
 
