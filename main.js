@@ -1,5 +1,4 @@
 const bookLists = document.querySelector('.books-list');
-const form = document.querySelector('form');
 const bookTitle = document.querySelector('.book-title');
 const bookAuthor = document.querySelector('.book-author');
 const addBookBtn = document.querySelector('.add-book-btn');
@@ -30,7 +29,7 @@ class Book {
   removeBook(id) {
     this.new = 'new';
     const bookList = RetrieveBooks.filter(
-      (book) => book.title !== RetrieveBooks[id].title
+      (book) => book.title !== RetrieveBooks[id].title,
     );
     localStorage.setItem('books', JSON.stringify(bookList));
   }
@@ -48,7 +47,7 @@ addBookBtn.addEventListener('click', (e) => {
   document.location.reload();
 });
 
-RetrieveBooks.forEach((book, index) => {
+RetrieveBooks.forEach((book) => {
   const singleBook = document.createElement('tr');
   singleBook.innerHTML = `
             <td>" ${book.title} " by ${book.author}</td>
