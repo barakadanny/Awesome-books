@@ -35,19 +35,45 @@ body {
 }
 
 /* table css */
-table {
+.books {
   border-collapse: collapse;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-td {
-  border: 1px solid#dddddd;
-  text-align: left;
-  padding: 5px;
+.books-list {
+  width: 80%;
+  border: 1px solid #ddd;
+  padding: 1rem;
 }
 
-tr:nth-child(even) {
+.book {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+}
+
+.book:nth-child(even) {
   background-color: #ddd;
+}
+
+/* btn css */
+.delete {
+  background-color: #f44336;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: 1px solid #f44336;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.delete:hover {
+  background-color: transparent;
+  color: #f44336;
 }
 
 /* add book section */

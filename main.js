@@ -1,69 +1,95 @@
-const bookLists = document.querySelector('.books-list');
-const bookTitle = document.querySelector('.book-title');
-const bookAuthor = document.querySelector('.book-author');
-const addBookBtn = document.querySelector('.add-book-btn');
-
-// retrieve data
-const RetrieveBooks = JSON.parse(localStorage.getItem('books'));
-
 class Book {
   constructor(title, author) {
     this.title = title;
     this.author = author;
   }
+}
 
-  // add book
-  addBook(title, author) {
-    this.new = 'new';
-    const newBook = { title, author };
-    if (localStorage.getItem('books')) {
-      let availableBooks = JSON.parse(localStorage.getItem('books'));
-      availableBooks = [newBook, ...availableBooks];
-      localStorage.setItem('books', JSON.stringify(availableBooks));
-    } else {
-      localStorage.setItem('books', JSON.stringify([newBook]));
+const booksAr = [];
+
+/* eslint max-classes-per-file: ["error", 2] */
+
+class DisplayBook {
+  static addBook(newBook, index) {
+    const lib = document.querySelector('.books-list');
+    if (!localStorage.getItem('books')) {
+      const noBook = document.createElement('p');
+      noBook.innerHTML = 'No books in library';
+      lib.appendChild(noBook);
     }
+    const container = document.createElement('div');
+    container.classList.add('book');
+    container.innerHTML = `
+    <div class="book-details">
+     <h3></h3>
+     <p>" ${newBook.title} " by ${newBook.author}</p>
+    </div>
+     <button class="delete" data-remove=${index}>Delete</button>
+     `;
+    lib.appendChild(container);
+
+    booksAr.push(newBook);
   }
 
-  // remove Book
-  removeBook(id) {
-    this.new = 'new';
-    const bookList = RetrieveBooks.filter(
-      (book) => book.title !== RetrieveBooks[id].title,
-    );
-    localStorage.setItem('books', JSON.stringify(bookList));
+  // delete function
+  static deleteBook(index) {
+    booksAr.splice(index, 1);
+    DisplayBook.setStorage();
+  }
+
+  // set local storage
+  static setStorage() {
+    localStorage.setItem('books', JSON.stringify(booksAr));
+  }
+
+  // fetch local storage
+  static getStorage() {
+    if (localStorage.getItem('books')) {
+      const books = JSON.parse(localStorage.getItem('books'));
+      books.forEach((book, index) => {
+        const newBook = new Book(book.title, book.author);
+        DisplayBook.addBook(newBook, index);
+      });
+    } else {
+      localStorage.setItem('books', JSON.stringify(booksAr));
+    }
+    const deleteBtn = document.querySelectorAll('.delete');
+    deleteBtn.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        const index = e.target.dataset.remove;
+        DisplayBook.deleteBook(index);
+        DisplayBook.setStorage();
+        e.target.parentElement.remove();
+      });
+    });
   }
 }
 
-const newBook = new Book();
+const form = document.querySelector('form');
 
-addBookBtn.addEventListener('click', (e) => {
+form.addEventListener('submit', (e) => {
   e.preventDefault();
+  const title = document.querySelector('.book-title').value;
+  const author = document.querySelector('.book-author').value;
 
-  const bTitle = bookTitle.value;
-  const bAuthor = bookAuthor.value;
+  if (title !== '' && author !== '') {
+    const newBook = new Book(title, author);
+    DisplayBook.addBook(newBook);
 
-  newBook.addBook(bTitle, bAuthor);
-  document.location.reload();
-});
+    DisplayBook.setStorage(newBook);
 
-RetrieveBooks.forEach((book) => {
-  const singleBook = document.createElement('tr');
-  singleBook.innerHTML = `
-            <td>" ${book.title} " by ${book.author}</td>
-            <td><input class="remove" type="submit" value="Remove"></td>
-        `;
+    document.querySelector('.book-title').value = '';
+    document.querySelector('.book-author').value = '';
+  }
 
-  const removeBtn = singleBook.querySelector('.remove');
-
-  const id = RetrieveBooks.indexOf(book);
-
-  // remove a book
-  removeBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    newBook.removeBook(id);
-    document.location.reload();
+  const deleteBtn = document.querySelectorAll('.delete');
+  deleteBtn.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      const index = e.target.dataset.remove;
+      DisplayBook.deleteBook(index);
+      e.target.parentElement.remove();
+    });
   });
-
-  bookLists.appendChild(singleBook);
 });
+
+DisplayBook.getStorage();
