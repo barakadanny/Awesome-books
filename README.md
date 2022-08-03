@@ -1,6 +1,6 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# Project Name
+# AWESOME BOOKS
 
 "Awesome books" is a simple website that displays a list of books and allows you to add and remove books from that list.
 
@@ -25,6 +25,9 @@ To get a local copy up and running follow these simple example steps.
 ### Prerequisites
 
 - knowledge of Basic Javascript and Html
+- Git
+- Any Text Editor
+- Browser With developer tools.
 
 ## Authors
 
@@ -36,6 +39,7 @@ To get a local copy up and running follow these simple example steps.
 👤 **David Kasilia**
 
 - GitHub: [@David-kasilia](https://github.com/David-Kasilia)
+- LinkedIn: [@David-Kasilia](https://www.linkedin.com/in/david-kasilia-846241211/)
 
 ## 🤝 Contributing
 

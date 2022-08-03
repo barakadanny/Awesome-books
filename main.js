@@ -1,64 +1,95 @@
-const bookList = document.querySelector('.books-list');
-const form = document.querySelector('form');
-const bookTitle = document.querySelector('.book-title');
-const bookAuthor = document.querySelector('.book-author');
-
-// array object
-const books = [];
-
-// function to store books localStorage
-function storeBooks() {
-  localStorage.setItem('books', JSON.stringify(books));
+class Book {
+  constructor(title, author) {
+    this.title = title;
+    this.author = author;
+  }
 }
 
-// function to create a new book
-function createBook(title, author) {
-  const newBook = {
-    title,
-    author,
-  };
-  books.push(newBook);
+const booksAr = [];
 
-  const singleBook = document.createElement('tr');
-  books.forEach((book, index) => {
-    singleBook.innerHTML = `
-            <td>${book.title}</td>
-            <td>${book.author}</td>
-            <td><input class="remove" type="submit" value="Remove"></td>
-        `;
+/* eslint max-classes-per-file: ["error", 2] */
 
-    const removeBtn = singleBook.querySelector('.remove');
-    removeBtn.addEventListener('click', () => {
-      books.splice(index, 1);
-      singleBook.remove();
-      storeBooks();
+class DisplayBook {
+  static addBook(newBook, index) {
+    const lib = document.querySelector('.books-list');
+    if (!localStorage.getItem('books')) {
+      const noBook = document.createElement('p');
+      noBook.innerHTML = 'No books in library';
+      lib.appendChild(noBook);
+    }
+    const container = document.createElement('div');
+    container.classList.add('book');
+    container.innerHTML = `
+    <div class="book-details">
+     <h3></h3>
+     <p>" ${newBook.title} " by ${newBook.author}</p>
+    </div>
+     <button class="delete" data-remove=${index}>Delete</button>
+     `;
+    lib.appendChild(container);
+
+    booksAr.push(newBook);
+  }
+
+  // delete function
+  static deleteBook(index) {
+    booksAr.splice(index, 1);
+    DisplayBook.setStorage();
+  }
+
+  // set local storage
+  static setStorage() {
+    localStorage.setItem('books', JSON.stringify(booksAr));
+  }
+
+  // fetch local storage
+  static getStorage() {
+    if (localStorage.getItem('books')) {
+      const books = JSON.parse(localStorage.getItem('books'));
+      books.forEach((book, index) => {
+        const newBook = new Book(book.title, book.author);
+        DisplayBook.addBook(newBook, index);
+      });
+    } else {
+      localStorage.setItem('books', JSON.stringify(booksAr));
+    }
+    const deleteBtn = document.querySelectorAll('.delete');
+    deleteBtn.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        const index = e.target.dataset.remove;
+        DisplayBook.deleteBook(index);
+        DisplayBook.setStorage();
+        e.target.parentElement.remove();
+      });
     });
-  });
-
-  // call the store books function
-  storeBooks();
-
-  bookList.appendChild(singleBook);
+  }
 }
 
-// add event to the form on submit
+const form = document.querySelector('form');
+
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  if (bookTitle.value !== '' && bookAuthor.value !== '') {
-    createBook(bookTitle.value, bookAuthor.value);
+  const title = document.querySelector('.book-title').value;
+  const author = document.querySelector('.book-author').value;
 
-    bookTitle.value = '';
-    bookAuthor.value = '';
+  if (title !== '' && author !== '') {
+    const newBook = new Book(title, author);
+    DisplayBook.addBook(newBook);
+
+    DisplayBook.setStorage(newBook);
+
+    document.querySelector('.book-title').value = '';
+    document.querySelector('.book-author').value = '';
   }
+
+  const deleteBtn = document.querySelectorAll('.delete');
+  deleteBtn.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      const index = e.target.dataset.remove;
+      DisplayBook.deleteBook(index);
+      e.target.parentElement.remove();
+    });
+  });
 });
 
-// function to retrieve book
-function retrieveBooks() {
-  const books = JSON.parse(localStorage.getItem('books'));
-  if (books) {
-    books.forEach((book) => {
-      createBook(book.title, book.author);
-    });
-  }
-}
-retrieveBooks();
+DisplayBook.getStorage();
