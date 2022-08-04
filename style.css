@@ -4,6 +4,14 @@
   padding: 0;
 }
 
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
 body {
   background-color: white;
   width: 100%;
@@ -23,6 +31,42 @@ body {
   padding: 1rem 0;
 }
 
+/* nav */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  margin-bottom: 1rem;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+}
+
+.menu li {
+  padding: 0.5rem 1rem;
+}
+
+.menu li:not(:last-child) {
+  margin-right: 0.4rem;
+}
+
+.menu-item {
+  cursor: pointer;
+}
+
+.menu-item.active {
+  background-color: rgb(190, 185, 185);
+}
+
+.menu li a {
+  color: #333;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
 .content-description {
   align-items: center;
   width: 100%;
@@ -32,6 +76,7 @@ body {
   text-align: center;
   font-size: 24px;
   font-weight: 500;
+  margin-bottom: 1rem;
 }
 
 /* table css */
@@ -39,6 +84,7 @@ body {
   border-collapse: collapse;
   width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -79,7 +125,7 @@ body {
 /* add book section */
 .add-book {
   width: 100%;
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -103,4 +149,31 @@ input {
 .add-book-btn {
   align-self: flex-end;
   max-width: 100px;
+}
+
+/* contact */
+.contact {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.contact-section {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.contact-list {
+  list-style-type: disc;
+}
+
+/* copy right css */
+.copy-right {
+  text-align: left;
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
 }

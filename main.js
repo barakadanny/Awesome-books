@@ -93,3 +93,54 @@ form.addEventListener('submit', (e) => {
 });
 
 DisplayBook.getStorage();
+
+// select tabs
+const list = document.querySelector('#list');
+const add = document.querySelector('#add-new');
+const contact = document.querySelector('#contact');
+
+// select sections
+const books = document.querySelector('#books');
+const addBook = document.querySelector('#addBooks');
+const contactSection = document.querySelector('#contact-section');
+
+// add event listener on list
+list.addEventListener('click', (e) => {
+  e.preventDefault();
+  books.style.display = 'flex';
+  addBook.style.display = 'none';
+  contactSection.style.display = 'none';
+});
+
+// add event listener on add
+add.addEventListener('click', (e) => {
+  e.preventDefault();
+  books.style.display = 'none';
+  addBook.style.display = 'flex';
+  contactSection.style.display = 'none';
+});
+
+// add event listener on contact
+contact.addEventListener('click', (e) => {
+  e.preventDefault();
+  books.style.display = 'none';
+  addBook.style.display = 'none';
+  contactSection.style.display = 'flex';
+});
+
+// change tabs js function
+function openTab(e) {
+  let i;
+  const tabLinks = document.getElementsByClassName('menu-item');
+  for (i = 0; i < tabLinks.length; i += 1) {
+    tabLinks[i].className = tabLinks[i].className.replace('active', '');
+  }
+  e.currentTarget.className += ' active';
+}
+
+const menuItem = document.querySelectorAll('.menu-item');
+
+// add event listener on menu items
+menuItem.forEach((item) => {
+  item.addEventListener('click', openTab);
+});
